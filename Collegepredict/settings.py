@@ -28,7 +28,7 @@ SECRET_KEY = 's%z=0w$!c8f_xj@wp3k=iebluixin&s)@m@d-@n5(hl7dt6d-2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['vidyarthi.herokuapp.com']
 
 
 # Application definition
