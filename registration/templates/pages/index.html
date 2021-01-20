@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    <title>Home</title>
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/index1.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
+<body>
+    <header>
+    <div class="welcome-text">
+        <h1>Find your college!</h1>
+            <div class="rightside"> 
+                <a href="#what_we_do"><button>What we do</button></a>
+            </div>
+    </div>
+    </header>
+    <section id="what_we_do" class="What_we_do">
+        <div class="wrapper">        
+            <div class="text">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque enim ab architecto officia asperiores sapiente mollitia, delectus ipsa hic reprehenderit, quod maxime velit magnam voluptatibus molestias cupiditate dolorum inventore suscipit?</p>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam sapiente consequuntur fugiat natus nisi reiciendis est tenetur mollitia suscipit possimus sequi alias eveniet, fuga quis rem molestias ab accusamus iusto deleniti. Modi asperiores soluta ratione possimus! Sapiente nostrum commodi, odio alias adipisci maxime temporibus nihil natus aperiam architecto. Mollitia architecto fuga qui. Voluptates tenetur facere vel temporibus minima nulla pariatur iusto amet quae reprehenderit laudantium, asperiores nihil ea enim maxime quisquam porro consequatur consectetur. Eveniet ipsam accusamus a nesciunt tenetur non odit quos at optio, corporis iste placeat animi explicabo accusantium iure ea in dolorum, nobis minima reiciendis. Mollitia, sed.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="colleges">
+        <div class="wrapper">
+            <h2>Colleges We have analysed</h2>
+                {% for coll in college%}
+                    <h5>{{coll.college}}</h5>
+                {%endfor%}
+
+                <small>Please register yourself for see the dashboard of these colleges</small>
+            </div>
+
+    </section>
+    
+    <footer>
+        <div class="wrapper">
+            <div class="Details">
+                <h4>Project Name</h4>
+                <p> Copyright &#169; 2020 Project Name</p>
+            </div>
+        </div>
+    </footer>
+
+{% endblock %}

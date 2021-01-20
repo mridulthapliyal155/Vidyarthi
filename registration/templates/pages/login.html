@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags  %}
+
+{% block login %}
+
+{% endblock %}
+{% block content %}
+
+<style>
+    .container{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        }
+
+    .container > div{
+        width: 1000px;
+        height: 500px;
+    }
+</style>
+
+    <div class="container">
+        <div class="login_form">
+            <h1 style="text-align: center;">Login</h1>
+                {% if form.errors %}
+                <p>Please Try again</p>
+                <a href="{% url 'login' %}">login again</a>
+    {% else %}
+            <form action="{% url 'login' %}" method="POST">
+                {{form|crispy}}
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline-primary">Login</button>
+            </form>
+    {% endif %}
+            <small>* not a user register here <span><a href="{% url 'register' %}">Sign in</a></span></small>
+</div>
+</div>
+
+{% endblock %}

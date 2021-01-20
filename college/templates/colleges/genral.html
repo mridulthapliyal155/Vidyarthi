@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block dashboard %}
+
+{% endblock%}
+
+{% block content %}
+
+
+<div class="container"> 
+    <h2 class="mb-3">Colleges that we had analysed</h2>
+    <div class="card-deck text-center " style="float: left;">
+        {% for coll in colleges%}
+        <div class="card">
+            <div class="card-body">
+                <img src="{{coll.college_pic}}" alt="" style="width: 300px; height: 100px;">
+            </div>
+            <div class="card-footer">
+                <p><a href="{% url 'dashboard' coll.id %}">{{coll.college}}</a></p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
