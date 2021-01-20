@@ -22,7 +22,7 @@ def register(request):
                 'thankyou for registering in this website, we will not disappoint you with our website.',
                 '21b06project@gmail.com',
                 [email],
-                fail_silently=True,
+                fail_silently=False,
 )
             messages.success(request,'You have successfully registered now please login')
             return redirect('login')
