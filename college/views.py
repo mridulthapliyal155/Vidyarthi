@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import College,Detail_college,Line_Chart,College_Info,College_Courses  # Not a line chart but a pie chart
+from .models import College,Detail_college,Line_Chart,College_Info,College_Courses 
 from django.http import JsonResponse,HttpResponse
 from django.contrib import messages
 
@@ -59,9 +59,9 @@ def dashboard(request,id):
 
             print("%.2f" % y_pred)
 
-            html = "<html><body>Your predicted salary is %s.</body></html>" % y_pred
+            # html = "<html><body>Your predicted salary is %s.</body></html>" % y_pred
 
-            return HttpResponse(html)
+            # return redirect('dashboard',id)
 
     else:
         form = Years_of_experience()
@@ -69,25 +69,25 @@ def dashboard(request,id):
         # regressor = None
     
 
-    if request.method == 'POST':
-        email_form = Email_send(request.POST)
-        if email_form.is_valid():
-            college_email = email_form.cleaned_data['college_email']
-            description = email_form.cleaned_data['description']
+    # if request.method == 'POST':
+    #     email_form = Email_send(request.POST)
+    #     if email_form.is_valid():
+    #         college_email = email_form.cleaned_data['college_email']
+    #         description = email_form.cleaned_data['description']
 
-            send_mail(
-                'Regarding College Information',
-                description,
-                '21b06project@gmail.com',
-                [college_email],
-                fail_silently=False,
-            )
-            return HttpResponse("<h1> Mail has been sent </h1>")
+    #         send_mail(
+    #             'Regarding College Information',
+    #             description,
+    #             '21b06project@gmail.com',
+    #             [college_email],
+    #             fail_silently=False,
+    #         )
+    #         return HttpResponse("<h1> Mail has been sent </h1>")
 
 
 
-    else:
-        email_form = Email_send()  
+    # else:
+    #     email_form = Email_send()  
 
     college_info_query = College_Info.objects.filter(name=id)
 
@@ -101,7 +101,6 @@ def dashboard(request,id):
         'colleges':colleges,
         'form':form,
         'y_pred':y_pred,
-        'email_form':email_form,
         'college_info_query':college_info_query,
         'college_course_query':college_course_query,
 
@@ -118,18 +117,6 @@ def college_info(request,id):
     return render(request,'colleges/all_college.html',context)
 
 
-# def ml_view(request,id):
-#     detail_college = get_object_or_404(College,id=id)
-    
-
-#     context = {
-#         'detail_college':detail_college,
-#         'form':form,
-#         'y_pred':y_pred,
-#     }
-    
-#     return render(request,'colleges/dashboard.html',context)
-
 
 def placement_chart(request,id):
     query_set = Detail_college.objects.filter(name = id)
@@ -144,6 +131,10 @@ def placement_chart(request,id):
         'placements': placements,
         'year': year,
     })
+
+
+# def compare_colleges(request):
+#     colleges = College_Info.objects.filter(city = "Kanpur")
 
 
 

@@ -1,118 +1,128 @@
 {% extends 'base.html' %}
-
-{% load static %}
-
-{% load crispy_forms_tags  %}
-
-{% block dashboard %}
-
-{% endblock%}
-
-
-{% block css %}
-  <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
-{% endblock %}
+{% load static %} {% load crispy_forms_tags %}
+ {%block dashboard %} {% endblock%} 
+ 
+ {% block css %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}" />
+{% endblock %} 
 
 {% block content %}
 
+<img
+  src="{{detail_college.college_pic}}"
+  alt=""
+  style="width: 100%; height: 300px"
+/>
 
-<img src="{{detail_college.college_pic}}" alt="" style="width: 100%; height: 300px;">
 
-<h2 class="heading m-3">General Information</h2>
+<h2 class="heading mt-1" > About The Institute  </h2>
 <div class="p-2 p-md-5 pt-5">
-            <div class="card-deck">
-            {% for college_info in college_info_query %}
-              <div class="card">
-                <div class="card-body">
-                  <h3 class="card-title">Rank</h3>
-                  <p class="card-text">{{college_info.rank}}</p>
-                </div>
-              </div>
-          <div class="card">
-            <div class="card-body">
-              <h3 class="card-title">Fees</h3>
-              <p class="card-text">{{college_info.college_fees}}</p>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-body">
-              <h3 class="card-title">Max Placement</h3>
-              <p class="card-text">{{college_info.max_placements}}</p>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-body">
-              <h3 class="card-title">College Email</h3>
-              <p class="card-text">{{college_info.college_email}}</p>
-            </div>
-          </div>
-          {% endfor %}
-        </div>
+  {% for college_info in college_info_query %}
+  <h4 class="center-text" style="text-align: justify; font-weight: 300; line-height: 35px; word-spacing: 5px; ">{{college_info.description}}</h4>
+{% endfor %}
 </div>
 
 
-<h2 class="heading">Courses offered</h2>
-  <div class="p-2 p-md-5 pt-5">
-    <div class="courses">
-      {% for college_course in college_course_query %}
-          <button type="button" class="btn btn-outline-primary mr-2">{{college_course.course}}</button>
-      {% endfor %}
+<h2 class="heading m-3">General Information</h2>
+<div class="p-2 p-md-5 pt-5">
+  <div class="card-deck">
+    {% for college_info in college_info_query %}
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title">Rank</h3>
+        <p class="card-text">{{college_info.rank}}</p>
+      </div>
     </div>
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title">Fees</h3>
+        <p class="card-text">{{college_info.college_fees}}</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title">Max Placement</h3>
+        <p class="card-text">{{college_info.max_placements}}</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title">College Email</h3>
+        <p class="card-text">{{college_info.college_email}}</p>
+      </div>
+    </div>
+    {% endfor %}
   </div>
+  <hr>
+</div>
+
+<h2 class="heading">Courses offered</h2>
+<div class="p-2 p-md-5 pt-5">
+  <div class="courses">
+    {% for college_course in college_course_query %}
+    <button type="button" class="btn btn-outline-primary mr-2">
+      {{college_course.course}}
+    </button>
+    {% endfor %}
+  </div>
+  <hr>
+</div>
 
 <h2 class="heading">Charts</h2>
-  <div class="row p-2 p-md-5 pt-5">
-    <div class="col-sm-6 col-lg-8 mb-1">
-      <div class="card">
-        <div class="card-body">
-          <canvas id="placement-chart" data-url="{% url 'placement-chart' detail_college.id  %}"></canvas>
-        </div>
-        <div class="card-footer">
-          <p>
-            This is a placement chart of college {{detail_college.college}}
-          </p>
-          </div>
+<div class="row p-2 p-md-5 pt-5">
+  <div class="col-sm-6 col-lg-8 mb-1">
+    <div class="card">
+      <div class="card-body">
+        <canvas
+          id="placement-chart"
+          data-url="{% url 'placement-chart' detail_college.id  %}"
+        ></canvas>
+      </div>
+      <div class="card-footer">
+        <p>This is a placement chart of college {{detail_college.college}}</p>
       </div>
     </div>
-    <div class="col-sm-6 col-lg-4 mb-1">
-      <div class="card">
-        <div class="card-body">
-            <canvas id="pie-chart"></canvas>
-          </div>
-          <div class="card-footer">
-            <p>
-              Total Student placed in  {{detail_college.college}} branch wise.
-            </p>
-            </div>
-        </div>
-      </div>
-    </div>
-
-    <h2 class="heading">Machine learning part</h2>
-
-    <div class="row p-2 p-md-5 pt-5">
-      <div class="col-sm-6 col-lg-12 mb-1">
-        <div class="card">
-          <div class="card-body">
-            <form method="POST">
-              {% csrf_token %}
-              {{ form|crispy}}
-              <button type="submit" class="btn btn-outline-primary">Submit</button>
-            </form>
-            <br>
-            <p>Average salary predicted is: {{y_pred}}</p>
-          </div>
-          <div class="card-footer">
-            <p>This form tells the average income of a teacher w.r.t its work experience</p>
-          </div>
-        </div>
-      </div>
-
   </div>
+  <div class="col-sm-6 col-lg-4 mb-1">
+    <div class="card">
+      <div class="card-body">
+        <canvas id="pie-chart"></canvas>
+      </div>
+      <div class="card-footer">
+        <p>Total Student placed in {{detail_college.college}} branch wise.</p>
+      </div>
+    </div>
+  </div>
+  <hr>
+</div>
 
-  <h2 class="heading"> Write something to the college </h2>
+<h2 class="heading">Machine learning part</h2>
 
-  <div class="row p-2 p-md-5 pt-5">
+<div class="row p-2 p-md-5 pt-5">
+  <div class="col-sm-6 col-lg-12 mb-1">
+    <div class="card">
+      <div class="card-body">
+        <form method="POST">
+          {% csrf_token %} {{ form|crispy}}
+          <button type="submit" class="btn btn-outline-primary">Submit</button>
+        </form>
+        <br />
+        <p>Average salary predicted is: {{y_pred}}</p>
+      </div>
+      <div class="card-footer">
+        <p>
+          This form tells the average income of a teacher w.r.t its work
+          experience
+        </p>
+      </div>
+    </div>
+  </div>
+  <hr>
+</div>
+
+<!-- <h2 class="heading">Write something to the college</h2> -->
+
+<!-- <div class="row p-2 p-md-5 pt-5">
     <div class="col-sm-6 col-lg-12 mb-1">
       <div class="card">
         <div class="card-body">
@@ -125,94 +135,91 @@
       </div>
     </div>
 
-</div>
+</div> -->
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-  <script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+<script>
+  $(function () {
+    var $populationChart = $("#placement-chart");
+    $.ajax({
+      url: $populationChart.data("url"),
+      success: function (data) {
+        var ctx = $populationChart[0].getContext("2d");
 
-$(function () {
+        new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: data.year,
+            datasets: [
+              {
+                label: "Placements",
+                backgroundColor: [
+                  "rgba(255, 99, 132, 0.2)",
+                  "rgba(54, 162, 235, 0.2)",
+                  "rgba(255, 206, 86, 0.2)",
+                  "rgba(75, 192, 192, 0.2)",
+                  "rgba(153, 102, 255, 0.2)",
+                  "rgba(255, 159, 64, 0.2)",
+                ],
 
-      var $populationChart = $("#placement-chart");
-      $.ajax({
-        url: $populationChart.data("url"),
-        success: function (data) {
-
-          var ctx = $populationChart[0].getContext("2d");
-
-          new Chart(ctx, {
-            type: 'bar',
-            data: {
-              labels: data.year,
-              datasets: [{
-                label: 'Placements',
-                backgroundColor: ['rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'],
-                
-                borderColor :[
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'],
-                borderWidth:3,
-                data: data.placements
-              }
-              ] 
-            },
-            options: {
-              responsive: true,
-              legend: {
-                position: 'top',
+                borderColor: [
+                  "rgba(255, 99, 132, 0.2)",
+                  "rgba(54, 162, 235, 0.2)",
+                  "rgba(255, 206, 86, 0.2)",
+                  "rgba(75, 192, 192, 0.2)",
+                  "rgba(153, 102, 255, 0.2)",
+                  "rgba(255, 159, 64, 0.2)",
+                ],
+                borderWidth: 3,
+                data: data.placements,
               },
-              title: {
-                display: true,
-                text: 'Placement Bar Chart'
-              }
-            }
-          });
-
-        }
-      });
-
-    });
-  </script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-    <script>
-  
-      var config = {
-        type: 'pie',
-        data: {
-          datasets: [{
-            data: {{ placed|safe }},
-            backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
             ],
-            label: 'Placed student branch wise '
-          }],
-          labels: {{ branch|safe }}
-        },
-        options: {
-          responsive: true
-        }
-      };
-  
-      window.onload = function() {
-        var ctx = document.getElementById('pie-chart').getContext('2d');
-        window.myPie = new Chart(ctx, config);
-      };
-  
-    </script>
+          },
+          options: {
+            responsive: true,
+            legend: {
+              position: "top",
+            },
+            title: {
+              display: true,
+              text: "Placement Bar Chart",
+            },
+          },
+        });
+      },
+    });
+  });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+<script>
 
+  var config = {
+    type: 'pie',
+    data: {
+      datasets: [{
+        data: {{ placed|safe }},
+        backgroundColor: [
+        'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)'
+        ],
+        label: 'Placed student branch wise '
+      }],
+      labels: {{ branch|safe }}
+    },
+    options: {
+      responsive: true
+    }
+  };
+
+  window.onload = function() {
+    var ctx = document.getElementById('pie-chart').getContext('2d');
+    window.myPie = new Chart(ctx, config);
+  };
+</script>
 
 {% endblock %}

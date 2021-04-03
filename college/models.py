@@ -22,12 +22,25 @@ class Line_Chart(models.Model):
     def __str__(self):
         return('{}'.format(self.name))
 
+CITIES = [
+    ('Kanpur','Kanpur'),
+    ('Lucknow','Lucknow'),
+]
+
+
+STATE = [
+    ('Uttar Pradesh','Uttar Pradesh')
+]
+
 class College_Info(models.Model):
     rank = models.CharField(max_length=100)
     college_email = models.EmailField(max_length=100)
     max_placements = models.CharField(max_length=100)
     college_fees = models.CharField(max_length=100)
     name = models.ForeignKey(College,on_delete=models.CASCADE)
+    description = models.TextField(max_length=1000,null=True,default=None)
+    city       = models.CharField(choices=CITIES,max_length=100,null=True,default=None)
+    state      = models.CharField(choices=STATE,null=True,default=None,max_length=100)
 
     def __str__(self):
         return ('{} rank is {}'.format(self.name,self.rank))
