@@ -31,10 +31,21 @@ def dashboard(request,id):
     branch =  []
     placed =  []
 
+    coll = []
+
+
+
     queryset = Line_Chart.objects.filter(name=id)
 
     colleges = College.objects.all()
     detail_college = get_object_or_404(College,id=id)
+
+    coll = detail_college.college.split()
+
+    print(coll)
+
+    college = "+".join(coll)
+    print(college)
 
     y_pred = 0
 
@@ -104,6 +115,7 @@ def dashboard(request,id):
         'y_pred':y_pred,
         'college_info_query':college_info_query,
         'college_course_query':college_course_query,
+        'map_college':college,
 
     }
     return render(request , 'colleges/dashboard.html',context)
@@ -132,6 +144,10 @@ def placement_chart(request,id):
         'placements': placements,
         'year': year,
     })
+
+
+
+
 
 
 # def compare_colleges(request):
