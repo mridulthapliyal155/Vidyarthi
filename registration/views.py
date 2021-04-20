@@ -3,11 +3,17 @@ from .forms import Registration
 from django.contrib import messages
 from django.core.mail import send_mail
 from college.models import College,Detail_college
+from django.contrib.auth.models import User
+
 
 def base(request):
     college = College.objects.all()
+    college_count = College.objects.all().count()
+    user_count = User.objects.count()
     context = {
         'college':college,
+        'count':college_count,
+        'ucount':user_count,
     }
     return render(request, 'pages/index.html',context)
 

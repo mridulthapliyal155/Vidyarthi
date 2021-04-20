@@ -1,6 +1,7 @@
 *{
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 html{
     scroll-behavior: smooth;
@@ -97,13 +98,27 @@ footer{
     color: white;
 }
 
-.Details{
+/* .Details{
     padding: 50px;
     flex-direction: column;
     display: flex;
     justify-content: center;
     align-items: center;
     
+}
+*/
+
+.colleges{
+    background: linear-gradient(57deg, #00C6A7 , #1E4D92 ); 
+}
+
+.description{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* width: 100%; */
+    text-align: center;
+    color: white;
 }
 
 

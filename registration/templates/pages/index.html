@@ -12,8 +12,6 @@
 
 
 {% block content %}
-
-<body>
     <header>
     <div class="welcome-text">
         <h1>Find your college!</h1>
@@ -21,35 +19,31 @@
                 <a href="#what_we_do"><button>What we do</button></a>
             </div>
     </div>
-    </header>
-    <section id="what_we_do" class="What_we_do">
-        <div class="wrapper">        
-            <div class="text">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque enim ab architecto officia asperiores sapiente mollitia, delectus ipsa hic reprehenderit, quod maxime velit magnam voluptatibus molestias cupiditate dolorum inventore suscipit?</p>
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam sapiente consequuntur fugiat natus nisi reiciendis est tenetur mollitia suscipit possimus sequi alias eveniet, fuga quis rem molestias ab accusamus iusto deleniti. Modi asperiores soluta ratione possimus! Sapiente nostrum commodi, odio alias adipisci maxime temporibus nihil natus aperiam architecto. Mollitia architecto fuga qui. Voluptates tenetur facere vel temporibus minima nulla pariatur iusto amet quae reprehenderit laudantium, asperiores nihil ea enim maxime quisquam porro consequatur consectetur. Eveniet ipsam accusamus a nesciunt tenetur non odit quos at optio, corporis iste placeat animi explicabo accusantium iure ea in dolorum, nobis minima reiciendis. Mollitia, sed.</p>
-            </div>
-        </div>
-    </section>
+</header>
     
     <section class="colleges">
-        <div class="wrapper">
-            <h2>Colleges We have analysed</h2>
-                {% for coll in college%}
-                    <h5>{{coll.college}}</h5>
-                {%endfor%}
-
-                <small>Please register yourself for see the dashboard of these colleges</small>
+        <div class="container">
+            <div class="row description pt-2">
+                <div class="col-md-6">
+                    <i class="fa fa-3x fa-building-o" aria-hidden="true"></i>
+                    <h1>{{count}}</h1>
+                </div>
+                <div class="col-md-6">
+                    <i class="fa fa-3x fa-users" aria-hidden="true"></i>
+                    <h1>{{ucount}}</h1>
+                </div>
             </div>
+        </div>
 
     </section>
     
-    <footer>
+    <!-- <footer>
         <div class="wrapper">
-            <div class="Details">
+            <div class="description">
                 <h4>Project Name</h4>
                 <p> Copyright &#169; 2020 Project Name</p>
             </div>
         </div>
-    </footer>
+    </footer> -->
 
 {% endblock %}

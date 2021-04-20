@@ -19,9 +19,10 @@ dataset = pd.read_csv('college/Salary_predictor.csv')
 @login_required
 def genral_info(request):
     colleges = College.objects.all()
-
+   
     context = {
-        'colleges':colleges
+        'colleges':colleges,
+       
     }
     return render(request,'colleges/genral.html',context)
 
