@@ -6,15 +6,19 @@ from django.contrib import messages
 
 from django.core.mail import send_mail
 
-from .forms import Years_of_experience,Email_send
+from .forms import Years_of_experience,Email_send,collegeSuggestionForm
 import numpy as np
 import pandas as pd
 
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn import tree,preprocessing
 
 
 dataset = pd.read_csv('college/Salary_predictor.csv')
+
+dataset1 = pd.read_csv('college/Colleges1.csv')
 
 @login_required
 def genral_info(request):
@@ -146,12 +150,46 @@ def placement_chart(request,id):
     })
 
 
+def suggestion(request):
+    pred = 'Output here'
+    if request.method == 'POST':
+        form = collegeSuggestionForm(request.POST)
+        if form.is_valid():
+            rating = form.cleaned_data['Rating']
+            collType = form.cleaned_data['collegeType']
+            avgFees = form.cleaned_data['avgFees']
+            
+            label_encoder = preprocessing.LabelEncoder()
+            # Encode labels in column 'Country'. 
+            dataset1['College Type']= label_encoder.fit_transform(dataset1['College Type']) 
 
+            dataset1['Rating'].fillna(3.11, inplace = True)
+            X = dataset1.iloc[:,[1,2,3]].values
+            Y = dataset1.iloc[:,0].values
 
+            X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size = 0.2, random_state = 0)
 
+            sc = StandardScaler()
+            X_train = sc.fit_transform(X_train)
+            X_test = sc.transform(X_test)
 
-# def compare_colleges(request):
-#     colleges = College_Info.objects.filter(city = "Kanpur")
+            classifier = tree.DecisionTreeClassifier() 
+            classifier.fit(X_train, y_train)
+            pred = classifier.predict([[rating,collType,avgFees]])
+
+            print(pred)
+
+            
+            return render(request,'suggestion/collSuggestion.html',{'form':form,'pred':pred})
+    
+    else:
+        form = collegeSuggestionForm()
+    
+    context = {
+        'form':form,
+        'pred':pred,
+    }
+    return render(request, 'suggestion/collSuggestion.html',context)
 
 
 

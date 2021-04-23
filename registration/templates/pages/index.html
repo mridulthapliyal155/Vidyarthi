@@ -16,7 +16,8 @@
     <div class="welcome-text">
         <h1>Find your college!</h1>
             <div class="rightside"> 
-                <a href="#what_we_do"><button>What we do</button></a>
+                <a href="{% url 'genral' %}"><button>Find College</button></a>
+                <a href="{% url 'suggest' %}"> <button>Suggestion</button></a>
             </div>
     </div>
 </header>
@@ -37,13 +38,6 @@
 
     </section>
     
-    <!-- <footer>
-        <div class="wrapper">
-            <div class="description">
-                <h4>Project Name</h4>
-                <p> Copyright &#169; 2020 Project Name</p>
-            </div>
-        </div>
-    </footer> -->
+    
 
 {% endblock %}
