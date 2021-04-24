@@ -169,15 +169,9 @@ def suggestion(request):
 
             X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size = 0.2, random_state = 0)
 
-            sc = StandardScaler()
-            X_train = sc.fit_transform(X_train)
-            X_test = sc.transform(X_test)
-
             classifier = tree.DecisionTreeClassifier() 
             classifier.fit(X_train, y_train)
             pred = classifier.predict([[rating,collType,avgFees]])
-
-            print(pred)
 
             
             return render(request,'suggestion/collSuggestion.html',{'form':form,'pred':pred})
