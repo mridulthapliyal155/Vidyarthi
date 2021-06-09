@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content  %}
+<style>
+.box-element{
+	box-shadow:hsl(0, 0%, 80%) 0 0 16px;
+	background-color: #fff;
+	border-radius: 4px;
+	padding: 10px;
+}
+
+.thumbnail{
+	width: 100%;
+	height: 200px;
+	-webkit-box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
+    -moz-box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
+    box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
+}
+
+.product{
+	border-radius: 0 0 4px 4px;
+}
+
+.bg-dark{
+	background-color: #4f868c!important;
+}
+
+
+
+
+
+.col-lg-4, .col-lg-6, .col-lg-8, .col-lg-12{
+	margin-top: 10px;
+}
+
+.btn{
+	border-radius: 0;
+}
+
+.row-image{
+	width: 100px;
+}
+
+
+</style>
+
+
+    
+
+    <div class="container">
+
+            {% if searched %}
+            <h4 style="font-weight: 300;">Search result for: {{searched}}</h4>
+            {% else %}
+            <h4 style="font-weight: 300;">You didn't search for college</h4>
+            {% endif %}
+    
+        
+    <div class="row">
+        {% for college in colleges %}
+    <div class="col-lg-4">
+        <img class="thumbnail" src="{{college.college_pic}}" alt="{{product.name}}">
+        <div class="box-element product">
+            <h6><strong>{{college}}</strong></h6>
+            <hr>
+            <a href="{% url 'dashboard' college.id %}" class="btn btn-outline-success" >View</a>
+        </div>
+    </div>
+    
+    {% endfor %}
+    </div>
+        
+    </div>
+    
+{% endblock %}

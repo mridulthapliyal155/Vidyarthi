@@ -65,11 +65,12 @@
 
 <div class="container">
 
-    <form class="mr-2 my-auto w-100 d-inline-block">
+    <form class="mr-2 my-auto w-100 d-inline-block" method="POST" action="{% url 'search' %}">
+        {% csrf_token %}
         <div class="input-group  mt-1">
-            <input type="text" class="form-control" placeholder="Search...">
+            <input type="text" class="form-control" placeholder="Search..." name="searched">
             <span class="input-group-append">
-                <button class="btn btn-outline-success ml-1" type="button">
+                <button class="btn btn-outline-success ml-1" type="submit">
                     Submit
                 </button>
             </span>

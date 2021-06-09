@@ -17,6 +17,7 @@ urlpatterns = [
     path('placement-chart/<int:id>', coll.placement_chart, name='placement-chart'),
     path('genral_info/',coll.genral_info , name='genral'),
     path('college/suggestion/',coll.suggestion , name='suggest'),
+    path('college/search/',coll.searchCollege , name='search'),
     # path('Machine_learning/1/<int:id>',coll.ml_view,name="ml"),
 
     path('',reg.base,name='index'),

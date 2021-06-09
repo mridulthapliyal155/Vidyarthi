@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from .models import College,Detail_college,Line_Chart,College_Info,College_Courses 
 from django.http import JsonResponse,HttpResponse
 from django.contrib import messages
+from django.db.models import Q
 
 from django.core.mail import send_mail
 
@@ -184,6 +185,26 @@ def suggestion(request):
         'pred':pred,
     }
     return render(request, 'suggestion/collSuggestion.html',context)
+
+
+def searchCollege(request):
+    if request.method == "POST":
+        searched = request.POST['searched']
+
+        # colleges = College.objects.filter(college_info__city__icontains= searched)
+        colleges = College.objects.filter(Q(college__icontains= searched) | Q(college_info__city__icontains= searched) | Q(college_info__state__icontains= searched))
+
+
+
+        return render(request,'colleges/search_college.html',
+                {'searched':searched,
+                 'colleges':colleges,   
+                })
+    
+    else:
+
+        return render(request,'colleges/search_college.html',
+                {})
 
 
 
