@@ -21,7 +21,7 @@ dataset = pd.read_csv('college/Salary_predictor.csv')
 
 dataset1 = pd.read_csv('college/Colleges1.csv')
 
-@login_required
+
 def genral_info(request):
     colleges = College.objects.all()
    
@@ -31,7 +31,6 @@ def genral_info(request):
     }
     return render(request,'colleges/genral.html',context)
 
-@login_required
 def dashboard(request,id):
     branch =  []
     placed =  []
@@ -159,20 +158,22 @@ def suggestion(request):
             rating = form.cleaned_data['Rating']
             collType = form.cleaned_data['collegeType']
             avgFees = form.cleaned_data['avgFees']
+            state = form.cleaned_data['State']
             
             label_encoder = preprocessing.LabelEncoder()
             # Encode labels in column 'Country'. 
-            dataset1['College Type']= label_encoder.fit_transform(dataset1['College Type']) 
+            dataset1['College Type']= label_encoder.fit_transform(dataset1['College Type'].astype(str))
+            dataset1['State']= label_encoder.fit_transform(dataset1['State'].astype(str)) 
+ 
 
-            dataset1['Rating'].fillna(3.11, inplace = True)
-            X = dataset1.iloc[:,[1,2,3]].values
+            X = dataset1.iloc[:,[1,2,3,4]].values
             Y = dataset1.iloc[:,0].values
 
             X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size = 0.2, random_state = 0)
 
             classifier = tree.DecisionTreeClassifier() 
             classifier.fit(X_train, y_train)
-            pred = classifier.predict([[rating,collType,avgFees]])
+            pred = classifier.predict([[rating,state,collType,avgFees]])
 
             
             return render(request,'suggestion/collSuggestion.html',{'form':form,'pred':pred})
