@@ -68,7 +68,7 @@
     <form class="mr-2 my-auto w-100 d-inline-block" method="POST" action="{% url 'search' %}">
         {% csrf_token %}
         <div class="input-group  mt-1">
-            <input type="text" class="form-control" placeholder="Search..." name="searched">
+            <input type="text" class="form-control" placeholder="Search College Name|City|State" name="searched">
             <span class="input-group-append">
                 <button class="btn btn-outline-success ml-1" type="submit">
                     Submit
