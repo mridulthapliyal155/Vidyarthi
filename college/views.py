@@ -4,6 +4,7 @@ from .models import College,Detail_college,Line_Chart,College_Info,College_Cours
 from django.http import JsonResponse,HttpResponse
 from django.contrib import messages
 from django.db.models import Q
+from django.core.paginator import Paginator,EmptyPage
 
 from django.core.mail import send_mail
 
@@ -24,9 +25,18 @@ dataset1 = pd.read_csv('college/Colleges1.csv')
 
 def genral_info(request):
     colleges = College.objects.all()
+
+    p = Paginator(colleges,12)
+    page_num = request.GET.get('page',1) # Default is 1
+
+    try:
+        page = p.page(page_num)
+    except EmptyPage:
+        page = p.page(1)
+
    
     context = {
-        'colleges':colleges,
+        'colleges':page,
        
     }
     return render(request,'colleges/genral.html',context)
