@@ -25,6 +25,22 @@ class Line_Chart(models.Model):
 CITIES = [
     ('Kanpur','Kanpur'),
     ('Lucknow','Lucknow'),
+    ('Varanasi','Varanasi'),
+    ('Allahbad','Allahbad'),
+    ('Greater Noida','Greater Noida'),
+    ('Noida','Noida'),
+    ('Ghaziabad','Ghaziabad'),
+    ('Sultanpur','Sultanpur'),
+    ('Gorakhpur','Gorakhpur'),
+    ('Agra','Agra'),
+    ('Jhansi','Jhansi'),
+    ('Sadabad Jakhaiva','Sadabad Jakhaiva'),
+    ('Raebareli','Raebareli'),
+    ('Bareilly','Bareilly'),
+    ('Muradanagar','Muradanagar'),
+    ('Jaunpur','Jaunpur'),
+    ('Amethi','Amethi'),
+    ('Mathura','Mathura'),
 ]
 
 
