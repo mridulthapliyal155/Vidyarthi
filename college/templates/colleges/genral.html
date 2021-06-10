@@ -95,7 +95,7 @@
             {% if colleges.has_previous %}
                 <li class="page-item"><a class="page-link" href="{%url 'genral'%}?page={{colleges.previous_page_number}}">Previous</a></li>
             {% endif %}
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">{{colleges.number}}</a></li>
             {% if colleges.has_next %}
                 <li class="page-item"><a class="page-link" href="{% url 'genral'%}?page={{colleges.next_page_number}} ">Next</a></li>
             {% endif %}
