@@ -41,11 +41,13 @@ CITIES = [
     ('Jaunpur','Jaunpur'),
     ('Amethi','Amethi'),
     ('Mathura','Mathura'),
+    ('New Delhi','New Delhi'),
 ]
 
 
 STATE = [
-    ('Uttar Pradesh','Uttar Pradesh')
+    ('Uttar Pradesh','Uttar Pradesh'),
+    ('Delhi','Delhi')
 ]
 
 class College_Info(models.Model):
