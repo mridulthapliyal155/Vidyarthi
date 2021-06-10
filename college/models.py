@@ -42,12 +42,20 @@ CITIES = [
     ('Amethi','Amethi'),
     ('Mathura','Mathura'),
     ('New Delhi','New Delhi'),
+    ('Nagpur','Nagpur'),
+    ('Mumbai','Mumbai'),
+    ('Pune','Pune'),
+    ('Navi Mumbai','Navi Mumbai'),
+    ('Aurangabad','Aurangabad'),
+    ('Sangli','Sangli'),
+    ('Nagpur','Nagpur'),
 ]
 
 
 STATE = [
     ('Uttar Pradesh','Uttar Pradesh'),
-    ('Delhi','Delhi')
+    ('Delhi','Delhi'),
+    ('Maharashtra','Maharashtra'),
 ]
 
 class College_Info(models.Model):
