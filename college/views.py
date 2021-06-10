@@ -162,8 +162,8 @@ def suggestion(request):
             
             label_encoder = preprocessing.LabelEncoder()
             # Encode labels in column 'Country'. 
-            dataset1['College Type']= label_encoder.fit_transform(dataset1['College Type'].astype(str))
-            dataset1['State']= label_encoder.fit_transform(dataset1['State'].astype(str)) 
+            dataset1['College Type']= label_encoder.fit_transform(dataset1['College Type'])
+            dataset1['State']= label_encoder.fit_transform(dataset1['State']) 
  
 
             X = dataset1.iloc[:,[1,2,3,4]].values
